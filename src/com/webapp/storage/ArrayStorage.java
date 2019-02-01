@@ -4,7 +4,7 @@ import com.webapp.model.Resume;
 
 import java.util.Arrays;
 
-public class ArrayStorage {
+public class ArrayStorage implements Storage {
 
     private static final int STORAGE_LIMIT = 10000;
     private Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -74,8 +74,5 @@ public class ArrayStorage {
         return -1;
     }
 
-    public void isExist() {
-
-    }
 }
 

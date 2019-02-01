@@ -1,9 +1,10 @@
 import com.webapp.model.Resume;
 import com.webapp.storage.ArrayStorage;
+import com.webapp.storage.Storage;
 
 public class MainArray {
 
-    private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private final static Storage ARRAY_STORAGE = new ArrayStorage();//интерфейс, не реализация
 
     public static void main(String[] args) {
 
