@@ -16,6 +16,9 @@ public class MainArray {
         Resume r3 = new Resume();
         r3.setUuid("uuid3");
 
+        Resume r4 = new Resume();
+        r4.setUuid("uuid3");
+
         arrayStorage.save(r1);
         arrayStorage.save(r2);
         arrayStorage.save(r3);
