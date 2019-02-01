@@ -11,12 +11,19 @@ public class MainArray {
         r1.setUuid("uuid1");
 
         Resume r2 = new Resume();
-        r1.setUuid("uuid2");
+        r2.setUuid("uuid2");
 
         Resume r3 = new Resume();
-        r1.setUuid("uuid3");
+        r3.setUuid("uuid3");
 
+        arrayStorage.save(r1);
+        arrayStorage.save(r2);
+        arrayStorage.save(r3);
 
+        for (Resume r : arrayStorage.getAll()) {
+            System.out.println(r);
+
+        }
     }
 
 }
