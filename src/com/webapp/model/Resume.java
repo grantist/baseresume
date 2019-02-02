@@ -1,6 +1,6 @@
 package com.webapp.model;
 
-public class Resume {
+public class Resume implements Comparable<Resume> {
 
     // Unique identifier
     private String uuid;
@@ -35,6 +35,10 @@ public class Resume {
 
     }
 
+    @Override
+    public int compareTo(Resume o) {
+        return uuid.compareTo(o.uuid);
+    }
 }
 
 
