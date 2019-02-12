@@ -32,7 +32,6 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
-
     }
 
 
@@ -41,11 +40,11 @@ public abstract class AbstractArrayStorage implements Storage {
         if (index >= 0) {
             throw new ExistStorageException(r.getUuid());
         } else if (size == STORAGE_LIMIT) {
-            throw new StorageException("Stack overflow", r.getUuid());
-
+            throw new StorageException("Storage overflow", r.getUuid());
+        } else {
+            insertElement(r, index);
+            size++;
         }
-        insertElement(r, index);
-        size++;
     }
 
 
@@ -60,11 +59,10 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-
     public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-
+            throw new NotExistStorageException(uuid);
         }
         return storage[index];
     }
