@@ -11,7 +11,7 @@ public class MainReflection {
         Field field = resume.getClass().getDeclaredFields()[0];
         field.setAccessible(true);
         field.set(resume, "newuuid");
-        storage.save(r);
+
         //TODO:  invoke r.toString via reflection
         Method method = resume.getClass().getMethod("toString");
         Object result = method.invoke(resume);
