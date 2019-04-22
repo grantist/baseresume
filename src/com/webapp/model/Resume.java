@@ -1,12 +1,14 @@
 package com.webapp.model;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
 
+    private static final long serialVersionUID = 1L;
     // Unique identifier
     private final String uuid;
     private final String fullName;
@@ -16,6 +18,14 @@ public class Resume implements Comparable<Resume> {
     private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
     public String getContact(ContactType type) {
         return contacts.get(type);
     }
@@ -24,9 +34,14 @@ public class Resume implements Comparable<Resume> {
         return sections.get(type);
     }
 
-    public Map<SectionType, Section> getSections() {
-        return sections;
+    public void addContact(ContactType type, String value) {
+        contacts.put(type, value);
     }
+
+    public void addSection(SectionType type, Section section) {
+        sections.put(type, section);
+    }
+
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -38,15 +53,6 @@ public class Resume implements Comparable<Resume> {
         Objects.requireNonNull(fullName, "fullName must not be null");
         this.uuid = uuid;
         this.fullName = fullName;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-
-    public String getFullName() {
-        return fullName;
     }
 
 

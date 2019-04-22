@@ -10,7 +10,8 @@ import java.util.logging.Logger;
 
 public abstract class AbstractStorage<SK> implements Storage {
 
-    private static Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
+    //    protected final Logger LOG = Logger.getLogger(getClass().getName());
+    private static final Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
 
     protected abstract SK getSearchKey(String uuid);
 
@@ -26,7 +27,6 @@ public abstract class AbstractStorage<SK> implements Storage {
 
     protected abstract List<Resume> doCopyAll();
 
-
     public void update(Resume r) {
         LOG.info("Update " + r);
         SK searchKey = getExistedSearchKey(r.getUuid());
@@ -39,13 +39,11 @@ public abstract class AbstractStorage<SK> implements Storage {
         doSave(r, searchKey);
     }
 
-
     public void delete(String uuid) {
         LOG.info("Delete " + uuid);
         SK searchKey = getExistedSearchKey(uuid);
         doDelete(searchKey);
     }
-
 
     public Resume get(String uuid) {
         LOG.info("Get " + uuid);
@@ -65,7 +63,7 @@ public abstract class AbstractStorage<SK> implements Storage {
     private SK getNotExistedSearchKey(String uuid) {
         SK searchKey = getSearchKey(uuid);
         if (isExist(searchKey)) {
-            LOG.warning("Resume" + uuid + "already exist");
+            LOG.warning("Resume " + uuid + " already exist");
             throw new ExistStorageException(uuid);
         }
         return searchKey;
@@ -73,7 +71,7 @@ public abstract class AbstractStorage<SK> implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        LOG.info("getAllSorted ");
+        LOG.info("getAllSorted");
         List<Resume> list = doCopyAll();
         Collections.sort(list);
         return list;

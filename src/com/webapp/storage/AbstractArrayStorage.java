@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
-
     protected static final int STORAGE_LIMIT = 10000;
+
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
@@ -26,10 +26,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         storage[index] = r;
     }
 
+    /**
+     * @return array, contains only Resumes in storage (without null)
+     */
+    @Override
     public List<Resume> doCopyAll() {
         return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
-
 
     @Override
     protected void doSave(Resume r, Integer index) {
@@ -41,17 +44,14 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         }
     }
 
-
     @Override
-    protected void doDelete(Integer index) {
+    public void doDelete(Integer index) {
         fillDeletedElement(index);
         storage[size - 1] = null;
         size--;
     }
 
-
-    @Override
-    protected Resume doGet(Integer index) {
+    public Resume doGet(Integer index) {
         return storage[index];
     }
 
@@ -60,11 +60,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         return index >= 0;
     }
 
-    protected abstract Integer getSearchKey(String uuid);
-
     protected abstract void fillDeletedElement(int index);
 
     protected abstract void insertElement(Resume r, int index);
 
+    protected abstract Integer getSearchKey(String uuid);
 }
-

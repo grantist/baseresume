@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage<Integer> {
-
     private List<Resume> list = new ArrayList<>();
 
     @Override
     protected Integer getSearchKey(String uuid) {
-
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getUuid().equals(uuid)) {
                 return i;
@@ -21,13 +19,13 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected void doUpdate(Resume r, Integer searchKey) {
-        list.set(searchKey, r);
+    protected boolean isExist(Integer searchKey) {
+        return searchKey != null;
     }
 
     @Override
-    protected boolean isExist(Integer searchKey) {
-        return searchKey != null;
+    protected void doUpdate(Resume r, Integer searchKey) {
+        list.set(searchKey, r);
     }
 
     @Override
@@ -42,7 +40,7 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doDelete(Integer searchKey) {
-        list.remove((searchKey).intValue());
+        list.remove(searchKey.intValue());
     }
 
     @Override
@@ -50,6 +48,7 @@ public class ListStorage extends AbstractStorage<Integer> {
         list.clear();
     }
 
+    @Override
     public List<Resume> doCopyAll() {
         return new ArrayList<>(list);
     }
