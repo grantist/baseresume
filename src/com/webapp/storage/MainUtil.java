@@ -1,14 +1,20 @@
 package com.webapp.storage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class MainUtil {
     public static void main(String[] args) {
-        System.out.println(Integer.valueOf(-1) == Integer.valueOf(-1));
-        System.out.println(Integer.valueOf(-1) == new Integer(-1));
-        int result = getInt();
-        System.out.println(result);
-    }
+        Path path = null;
+        try {
+            path = Files.createFile(Paths.get("D:\\Java\\test2.txt"));
+            Files.delete(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    private static Integer getInt() {
-        return null;
+
     }
 }
