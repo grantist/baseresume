@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public abstract class AbstractStorageTest {
                         new Organization("Organization12", "http://Organization12.ru")));
         R2.addContact(ContactType.SKYPE, "skype2");
         R2.addContact(ContactType.PHONE, "22222");
-        R1.addSection(SectionType.EXPERIENCE,
+        R2.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
                         new Organization("Organization2", "http://Organization2.ru",
                                 new Organization.Position(2015, Month.JANUARY, "position1", "content1"))));
@@ -99,7 +100,7 @@ public abstract class AbstractStorageTest {
     public void getAllSorted() throws Exception {
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
-        assertEquals(list, Arrays.asList(R1, R2, R3));
+        assertEquals(new ArrayList<>(list), (new ArrayList<>(Arrays.asList(R1, R2, R3))));
     }
 
     @Test
@@ -139,7 +140,7 @@ public abstract class AbstractStorageTest {
     }
 
     private void assertGet(Resume r) {
-        assertEquals(r, storage.get(r.getUuid()));
+        assertEquals(r, (Resume) storage.get(r.getUuid()));
     }
 
     private void assertSize(int size) {

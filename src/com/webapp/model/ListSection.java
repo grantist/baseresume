@@ -6,10 +6,14 @@ import java.util.Objects;
 
 
 public class ListSection extends Section {
-    private final List<String> items;
+    private List<String> items;
     private static final long serialVersionUID = 1L;
+
     public ListSection(String... items) {
         this(Arrays.asList(items));
+    }
+
+    public ListSection() {
     }
 
     public ListSection(List<String> items) {
